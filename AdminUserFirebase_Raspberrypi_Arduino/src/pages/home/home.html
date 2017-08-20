@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+          Admin Security Lock
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="goToProfile()">
+        <ion-icon name="person"></ion-icon>
+        </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <button ion-button large block round outline color="secondary" (click)="unlock()" (click)=" unlockToast()">
+    <ion-icon name="md-unlock"> Unlock</ion-icon>
+  </button>
+
+  <button ion-button large block round outline color="danger" (click)="lock()" (click)="lockToast()"> 
+    <ion-icon name="md-lock"> Lock</ion-icon>
+  </button>
+</ion-content>
+
+
+
+
+
+

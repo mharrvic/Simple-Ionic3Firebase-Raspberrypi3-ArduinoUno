@@ -1,49 +1,72 @@
 import { Component } from '@angular/core';
-import { ToastController, ToastOptions, NavController } from 'ionic-angular';
+import { NavController, ToastController, ToastOptions } from 'ionic-angular';
+import { ProfileProvider } from '../../providers/profile/profile';
+import { AuthProvider } from '../../providers/auth/auth';
 import * as firebase from "firebase";
 
 var otherAppConfig = {
+    apiKey: "AIzaSyBR1JHC3Y42cBUF5hwWuKGQAXXXc6HRxaE",
+    authDomain: "users-doorlock.firebaseapp.com",
+    databaseURL: "https://users-doorlock.firebaseio.com",
+    projectId: "users-doorlock",
+    storageBucket: "users-doorlock.appspot.com",
+    messagingSenderId: "314285629746"
+  };
   
+  // Initialize another app with a different config
+  var otherApp = firebase.initializeApp(otherAppConfig, "other");
+  console.log(otherApp.name);      // "other"
   
-};
+      var db = otherApp.database();
+      var ref = db.ref("button");
 
-// Initialize another app with a different config
-var otherApp = firebase.initializeApp(otherAppConfig, "other");
-console.log(otherApp.name);      // "other"
 
-    var db = otherApp.database();
-    var ref = db.ref("button");
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
+  public userProfile: any;
+
 
   toastOptions: ToastOptions
 
-  constructor(public toastCtrl: ToastController, public navCtrl: NavController) {}
+  constructor(public toastCtrl: ToastController, public navCtrl: NavController,
+    public profileProvider: ProfileProvider, public authProvider: AuthProvider) {} 
 
-  goToCreate(){ this.navCtrl.push('event-create'); }
+  ionViewDidEnter() {
+    this.profileProvider.getUserProfile().on('value', userProfileSnapshot => {
+      this.userProfile = userProfileSnapshot.val();
+    });
+  }
 
-  goToList(){ this.navCtrl.push('event-list'); }
 
-  unlock() {
-    ref.set("down");
-    
+  UpdateUnlockDoor(unlockDoor) {
+    this.profileProvider.UpdateUnlockDoor('unlock');
+  }
+  UpdateLockDoor(lockDoor){
+    this.profileProvider.UpdatelockDoor('lock');
+  }
+  
+
+  unlock(){
+    ref.set("unlock");
   }
   lock(){
-    ref.set("up");
+    ref.set("lock");
   }
 
-  unlockToast() {
+  
+
+  UnlockToast() {
     let toast = this.toastCtrl.create({
       message: 'The Door is now UNLOCK!',
       duration: 3000
     });
     toast.present();
   }
-  lockToast() {
+  LockToast() {
     let toast = this.toastCtrl.create({
       message: 'The Door is now LOCK!',
       duration: 3000

@@ -14,6 +14,12 @@ export class MyApp {
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     
     firebase.initializeApp({
+      apiKey: "AIzaSyDa5xysepngVfS8y_ORgu7jjLHBFPVy7q4",
+    authDomain: "project-magnetic-doorlock.firebaseapp.com",
+    databaseURL: "https://project-magnetic-doorlock.firebaseio.com",
+    projectId: "project-magnetic-doorlock",
+    storageBucket: "project-magnetic-doorlock.appspot.com",
+    messagingSenderId: "204237060173"
       
   });
 

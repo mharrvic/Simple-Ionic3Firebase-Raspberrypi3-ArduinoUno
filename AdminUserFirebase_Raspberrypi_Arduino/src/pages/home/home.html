@@ -13,11 +13,11 @@
 
 
 <ion-content padding>
-  <button ion-button large block round outline color="secondary" (click)="unlock()" (click)=" unlockToast()">
+  <button ion-button large block round outline color="secondary" (click)="UpdateUnlockDoor()" (click)="unlock()" (click)="UnlockToast()">
     <ion-icon name="md-unlock"> Unlock</ion-icon>
   </button>
 
-  <button ion-button large block round outline color="danger" (click)="lock()" (click)="lockToast()"> 
+  <button ion-button large block round outline color="danger" (click)="UpdateLockDoor()" (click)="lock()" (click)="LockToast()"> 
     <ion-icon name="md-lock"> Lock</ion-icon>
   </button>
 </ion-content>

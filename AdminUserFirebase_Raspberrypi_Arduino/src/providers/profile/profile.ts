@@ -5,6 +5,7 @@ import firebase from 'firebase';
 export class ProfileProvider {
   public userProfile:firebase.database.Reference;
   public currentUser:firebase.User;
+  public doorStatus: firebase.database.Reference;
   
   constructor() {
     firebase.auth().onAuthStateChanged( user => {
@@ -24,6 +25,22 @@ export class ProfileProvider {
       firstName: firstName,
       lastName: lastName,
     });
+  }
+
+  //globalDoorStatus(doorStatus: string): firebase.Promise<any> {
+    
+  //}
+
+  UpdateUnlockDoor(unlockDoor: string): firebase.Promise<any> {
+    return this.userProfile.update({
+      doorStatus: unlockDoor,
+    });
+  }
+
+  UpdatelockDoor(lockDoor: string): firebase.Promise<any> {
+    return this.userProfile.update({
+      doorStatus: lockDoor,
+    })
   }
 
   updateDOB(birthDate: string): firebase.Promise<any> {

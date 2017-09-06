@@ -5,15 +5,16 @@ board = new five.Board();
 
 board.on("ready", function () {
     button = new five.Button(8);
-    var led = new five.Led(13);
+    var ledGreen = new five.Led(13);
+    var ledRed = new five.Led(12);
 
     var config = {
-      apiKey: "AIzaSyDe1GOyzSom4q6Y3IEj58EbgJXj5-z4ffk",
-      authDomain: "test-936f7.firebaseapp.com",
-      databaseURL: "https://test-936f7.firebaseio.com",
-      projectId: "test-936f7",
-      storageBucket: "test-936f7.appspot.com",
-      messagingSenderId: "428996715721"
+        apiKey: "AIzaSyDa5xysepngVfS8y_ORgu7jjLHBFPVy7q4",
+        authDomain: "project-magnetic-doorlock.firebaseapp.com",
+        databaseURL: "https://project-magnetic-doorlock.firebaseio.com",
+        projectId: "project-magnetic-doorlock",
+        storageBucket: "project-magnetic-doorlock.appspot.com",
+        messagingSenderId: "204237060173"
     };
     firebase.initializeApp(config);
 
@@ -24,23 +25,25 @@ board.on("ready", function () {
     ref.on("value", function (snapshot) {
         var val = snapshot.val();
 
-        if (val == "down") {
-            console.log("down");
+        if (val == "unlock") {
+            console.log("unlock");
             // Set new value on LED
-            led.on();
+            ledGreen.on();
+            ledRed.off();
         } else {
-            console.log("up");
-            led.off();
+            console.log("lock");
+            ledGreen.off();
+            ledRed.on();
         }
     });
 
     // Listen for button changes on hardware
     button.on("down", function () {
         // Set new value in Firebase
-        ref.set("down");
+        ref.set("unlock");
     });
 
     button.on("up", function () {
-        ref.set("up");
+        ref.set("lock");
     });
 });

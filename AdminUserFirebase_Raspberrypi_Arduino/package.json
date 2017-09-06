@@ -1,6 +1,6 @@
 {
-    "name": "SecuredMagneticDoorlockApp",
-    "author": "chicano@mharvic",
+    "name": "AdminSecuredDoorlockApp",
+    "author": "thesis30@gmail.com",
     "homepage": "google.com",
     "private": true,
     "scripts": {
@@ -48,7 +48,7 @@
         "typescript": "2.3.4"
     },
     "version": "0.0.1",
-    "description": "An Ionic project",
+    "description": "An Research Project",
     "cordova": {
         "plugins": {
             "cordova-plugin-camera": {},

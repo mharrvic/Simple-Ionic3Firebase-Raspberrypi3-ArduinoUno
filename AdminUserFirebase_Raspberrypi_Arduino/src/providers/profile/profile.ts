@@ -27,9 +27,7 @@ export class ProfileProvider {
     });
   }
 
-  //globalDoorStatus(doorStatus: string): firebase.Promise<any> {
-    
-  //}
+ 
 
   UpdateUnlockDoor(unlockDoor: string): firebase.Promise<any> {
     return this.userProfile.update({
